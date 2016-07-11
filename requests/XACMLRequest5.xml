@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17 http://docs.oasis-open.org/xacml/3.0/xacml-core-v3-schema-wd-17.xsd"
+  ReturnPolicyIdList="true" CombinedDecision="true">
+ 
+  <Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">
+    <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" IncludeInResult="false">
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">leoVergara</AttributeValue>
+    </Attribute>
+  </Attributes>
+  
+  <Attributes Category="urn:oasis:names:tc:xacml:3.0:role">
+    <Attribute AttributeId="role" IncludeInResult="true">
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">premium</AttributeValue>
+    </Attribute>
+  </Attributes>
+  
+  <Attributes Category="urn:oasis:names:tc:xacml:3.0:count">
+    <Attribute AttributeId="countCopy" IncludeInResult="true">
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">1</AttributeValue>
+    </Attribute>
+  </Attributes>
+  
+  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource">
+    <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+      IncludeInResult="false">
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:mvideo:Baztan.mp4</AttributeValue>
+    </Attribute>
+  </Attributes>
+  
+  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+    <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="false">
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">copy</AttributeValue>
+    </Attribute>
+  </Attributes>
+</Request>

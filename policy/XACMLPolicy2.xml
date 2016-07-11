@@ -1,0 +1,62 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17 http://docs.oasis-open.org/xacml/3.0/xacml-core-v3-schema-wd-17.xsd"
+	PolicyId="urn:isdcm:policyid:2"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable"
+	Version="1.0">
+
+	<Description> Copia de Pelicula</Description>
+	<Target/>
+	<Rule RuleId="urn:oasis:names:tc:xacml:3.0:ejemplo:RuleBaztan" Effect="Permit">
+		<Description> Usuario premium pueden hacer 3 copias de pelicula dada en urn:mvideo:Baztan.mp4</Description>
+		<Target>
+			<AnyOf>
+				<AllOf>
+					<!-- Which kind of user: Premium -->
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">premium</AttributeValue>
+						<AttributeDesignator MustBePresent="false"
+							Category="urn:oasis:names:tc:xacml:3.0:role" AttributeId="role"
+							DataType="http://www.w3.org/2001/XMLSchema#string"/>
+					</Match>
+					
+					<!-- Which resource -->
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:mvideo:Baztan.mp4</AttributeValue>
+						<AttributeDesignator MustBePresent="false"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							DataType="http://www.w3.org/2001/XMLSchema#string"/>
+					</Match>
+					
+					<!-- Which action  -->
+					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">copy</AttributeValue>
+						<AttributeDesignator MustBePresent="false"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+							DataType="http://www.w3.org/2001/XMLSchema#string"/>
+					</Match>
+					
+				</AllOf>
+			</AnyOf>
+		</Target>
+		
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
+				
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
+						<AttributeDesignator MustBePresent="false"
+							Category="urn:oasis:names:tc:xacml:3.0:count" AttributeId="countCopy"
+							DataType="http://www.w3.org/2001/XMLSchema#integer"/>
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">4</AttributeValue>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+	
+	<Rule RuleId="urn:oasis:names:tc:xacml:3.0:lab6:FinalRule" Effect="Deny"/>
+		
+</Policy>
