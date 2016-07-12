@@ -5,10 +5,10 @@
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable"
 	Version="1.0">
 
-	<Description> Copia de Pelicula</Description>
+	<Description> View SAM file</Description>
 	<Target/>
-	<Rule RuleId="urn:oasis:names:tc:xacml:3.0:ejemplo:RuleBaztan" Effect="Permit">
-		<Description> Usuario premium pueden hacer 3 copias de pelicula dada en urn:mvideo:Baztan.mp4</Description>
+	<Rule RuleId="urn:oasis:names:tc:xacml:3.0:ejemplo:RuleSAM" Effect="Permit">
+		<Description>A premium user is able to view a SAM file given in SAMfilesfolder </Description>
 		<Target>
 			<AnyOf>
 				<AllOf>
@@ -22,7 +22,7 @@
 					
 					<!-- Which resource -->
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:mvideo:Baztan.mp4</AttributeValue>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">SAMfiles</AttributeValue>
 						<AttributeDesignator MustBePresent="false"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
 							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
