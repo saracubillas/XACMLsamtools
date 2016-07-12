@@ -20,14 +20,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        if (args.length < 3) {
-            System.out.println("Usage: <config_file> <request_file> <policy_directory>");
+        if (args.length < 1) {
+            System.out.println("Usage: <request_file>");
             System.exit(1);
         }
 
-        String config_path = args[0];
-        String request_path = args[1];
-        String policy_path = args[2];   // folder with policies
+        String config_path = "config/config_rbac.xml";
+        String request_path = args[0];
+        String policy_path = "policy";   // folder with policies
 
         initBalana(config_path, policy_path);
 
