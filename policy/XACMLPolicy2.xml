@@ -31,7 +31,7 @@
 					
 					<!-- Which action  -->
 					<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">copy</AttributeValue>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view</AttributeValue>
 						<AttributeDesignator MustBePresent="false"
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
 							AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
@@ -48,7 +48,7 @@
 				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than">
 					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
 						<AttributeDesignator MustBePresent="false"
-							Category="urn:oasis:names:tc:xacml:3.0:count" AttributeId="countCopy"
+							Category="urn:oasis:names:tc:xacml:3.0:count" AttributeId="countView"
 							DataType="http://www.w3.org/2001/XMLSchema#integer"/>
 					</Apply>
 					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">4</AttributeValue>

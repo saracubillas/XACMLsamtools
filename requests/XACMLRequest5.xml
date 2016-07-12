@@ -17,7 +17,7 @@
   </Attributes>
   
   <Attributes Category="urn:oasis:names:tc:xacml:3.0:count">
-    <Attribute AttributeId="countCopy" IncludeInResult="true">
+    <Attribute AttributeId="countView" IncludeInResult="true">
       <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">1</AttributeValue>
     </Attribute>
   </Attributes>
@@ -31,7 +31,7 @@
   
   <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
     <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="false">
-      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">copy</AttributeValue>
+      <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view</AttributeValue>
     </Attribute>
   </Attributes>
 </Request>
