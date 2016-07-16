@@ -18,16 +18,23 @@ public class Main {
 
     private static String response;
 
+    native void view();
+
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            System.out.println("Usage: <request_file>");
-            System.exit(1);
+        if (args.length < 2) {
+            System.out.println("Usage: <request_file> <sam_file>");
+            /*System.exit(1);*/
         }
 
         String config_path = "config/config_rbac.xml";
+        String policy_path = "policy";
+/*
         String request_path = args[0];
-        String policy_path = "policy";   // folder with policies
+        String sam_file = args[1]; */
+
+        String request_path = "requests/XACMLRequest5.xml";
+        String sam_file = "toy.sam";
 
         initBalana(config_path, policy_path);
 
@@ -44,12 +51,24 @@ public class Main {
             System.out.println(response);
             System.out.println("===========================================================");
 
-            readXML(response);
+
+            if (readXML(response).equals("Permit")){
+                System.out.println("\n=== OK");
+                viewSAM(sam_file);
+            } else {
+                System.out.println("Permision denied");
+            }
 
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
 
+    }
+
+    static public void viewSAM(String sam_file) {
+        System.loadLibrary("samtools");
+        Main samtool = new Main();
+        samtool.view();
     }
 
     private static void initBalana(String config_path, String policy_path) {
@@ -68,18 +87,21 @@ public class Main {
         return new PDP(pdpConfig);
     }
 
-    private static void readXML(String response) {
+
+    private static String readXML(String response) {
+        String decision = "";
         try {
 
             Document doc = loadXMLFromString(response);
             doc.getDocumentElement().normalize();
+            decision = doc.getElementsByTagName("Decision").item(0).getTextContent();
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-            System.out.println("Decision :" + doc.getElementsByTagName("Decision").item(0).getTextContent());
+            System.out.println("Decision :" + decision);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return decision;
     }
 
     public static Document loadXMLFromString(String xml) throws Exception {
