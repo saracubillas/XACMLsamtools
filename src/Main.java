@@ -8,10 +8,14 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
     private static Balana balana;
@@ -55,6 +59,7 @@ public class Main {
             if (readXML(response).equals("Permit")){
                 System.out.println("\n=== OK");
                 viewSAM(sam_file);
+
             } else {
                 System.out.println("Permision denied");
             }
@@ -65,12 +70,49 @@ public class Main {
 
     }
 
-    static public void viewSAM(String sam_file) {
-        System.loadLibrary("samtools");
-        Main samtool = new Main();
-        samtool.view();
+    static public void viewSAM(String args) {
+        Main obj = new Main();
+
+
+        //in mac oxs
+        String command = "samtools view -bS /Users/sara/Documents/MIRI/thesis/samtools-1.3.1/examples/toy.sam";
+
+        //in windows
+        //String command = "ping -n 3 " + domainName;
+
+        String output = obj.executeCommand(command);
+
+        System.out.println(output);
+        System.out.println("\n========OUTPUT======");
     }
 
+
+
+    private String executeCommand(String command) {
+
+        StringBuffer output = new StringBuffer();
+
+        Process p;
+        try {
+            p = Runtime.getRuntime().exec(command);
+            System.out.println("\n========executing======");
+            p.waitFor();
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String line = "";
+            while ((line = reader.readLine())!= null) {
+                output.append(line + "\n");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("\n========error======");
+        }
+
+        return output.toString();
+
+    }
     private static void initBalana(String config_path, String policy_path) {
 
         System.setProperty(ConfigurationStore.PDP_CONFIG_PROPERTY, config_path);
